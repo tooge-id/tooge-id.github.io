@@ -43,13 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Hero Animations ---
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-    tl.from('.gsap-hero-title', {
+    tl.from('.gsap-hero-title span', {
         y: 100,
         opacity: 0,
-        duration: 1,
-        ease: 'power4.out',
+        duration: 1.2,
         stagger: 0.2
     })
         .from('.gsap-hero-subtitle', {
@@ -57,13 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
             opacity: 0,
             duration: 1,
             ease: 'power3.out'
-        }, '-=0.5')
+        }, '-=0.8')
         .from('.gsap-hero-btn', {
             y: 20,
             opacity: 0,
             duration: 0.8,
             ease: 'back.out(1.7)'
-        }, '-=0.5');
+        }, '-=0.6');
 
     // --- Scroll Animations ---
 
@@ -112,9 +111,31 @@ document.addEventListener('DOMContentLoaded', () => {
         onLeaveBack: batch => gsap.set(batch, { opacity: 0, y: 50 })
     });
 
-    // Determine initial state for batching
+    // Determine initial state for features
     gsap.set('.feature-card', {
         y: 50,
+        opacity: 0
+    });
+
+    // --- Product Cards Animation ---
+    ScrollTrigger.batch('.product-card', {
+        start: 'top 85%',
+        onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            autoAlpha: 1,
+            stagger: 0.15,
+            overwrite: true,
+            duration: 0.8,
+            ease: 'power3.out'
+        }),
+        onLeave: batch => gsap.set(batch, { opacity: 0, y: 30 }),
+        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15, overwrite: true, duration: 0.8, ease: 'power3.out' }),
+        onLeaveBack: batch => gsap.set(batch, { opacity: 0, y: 30 })
+    });
+
+    gsap.set('.product-card', {
+        y: 30,
         opacity: 0
     });
 

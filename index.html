@@ -71,23 +71,34 @@
     <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40"></canvas>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md border-b border-brand-border/30"
+    <nav class="fixed top-6 left-0 right-0 max-w-7xl w-[95%] mx-auto z-50 transition-all duration-300 rounded-full border border-brand-border/30 bg-brand-darker/80 backdrop-blur-md"
         id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+        <div class="px-6 sm:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <span class="font-heading font-bold text-2xl text-white tracking-tighter">TOOGE</span>
+                    <span class="font-heading font-bold text-2xl text-white tracking-tighter cursor-pointer"
+                        onclick="window.scrollTo(0,0)">TOOGE</span>
                 </div>
+
+                <!-- Desktop Menu -->
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
+                    <div class="ml-10 flex items-center space-x-8">
                         <a href="#vision"
-                            class="hover:text-brand-green transition-colors px-3 py-2 rounded-md text-sm font-medium">Vision</a>
+                            class="text-gray-300 hover:text-brand-green transition-colors text-sm font-medium">Vision</a>
                         <a href="#features"
-                            class="hover:text-brand-green transition-colors px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                            class="text-gray-300 hover:text-brand-green transition-colors text-sm font-medium">Features</a>
+                        <a href="#products"
+                            class="text-gray-300 hover:text-brand-green transition-colors text-sm font-medium">Products</a>
+                        <a href="#gallery"
+                            class="text-gray-300 hover:text-brand-green transition-colors text-sm font-medium">Gallery</a>
+                        <a href="#contact"
+                            class="text-gray-300 hover:text-brand-green transition-colors text-sm font-medium">Contact</a>
                         <a href="https://github.com/tooge-id" target="_blank"
-                            class="border border-brand-green text-brand-green hover:bg-brand-green hover:text-black transition-all px-4 py-2 rounded-full text-sm font-bold">GitHub</a>
+                            class="bg-brand-green text-brand-dark hover:bg-brand-cyan transition-all px-5 py-2 rounded-full text-sm font-bold">GitHub</a>
                     </div>
                 </div>
+
                 <!-- Mobile menu button -->
                 <div class="flex md:hidden">
                     <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
@@ -110,23 +121,28 @@
             </div>
         </div>
 
-        <!-- Mobile menu, show/hide based on menu state. -->
+        <!-- Mobile menu, floating below the pill -->
         <div x-show="mobileMenuOpen" x-cloak
-            class="md:hidden bg-brand-darker/95 backdrop-blur-xl border-b border-brand-border absolute w-full z-50"
+            class="md:hidden absolute top-full left-0 right-0 mt-2 bg-brand-darker/95 backdrop-blur-xl border border-brand-border rounded-2xl overflow-hidden shadow-xl"
             id="mobile-menu" x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="transform opacity-0 scale-95"
-            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="transform opacity-100 scale-100"
-            x-transition:leave-end="transform opacity-0 scale-95">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+            x-transition:enter-start="transform opacity-0 scale-95 -translate-y-2"
+            x-transition:enter-end="transform opacity-100 scale-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100 translate-y-0"
+            x-transition:leave-end="transform opacity-0 scale-95 -translate-y-2">
+            <div class="px-4 pt-4 pb-6 space-y-2 text-center">
                 <a href="#vision" @click="mobileMenuOpen = false"
-                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-2 rounded-md text-base font-medium">Vision</a>
+                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-3 rounded-xl text-base font-medium">Vision</a>
                 <a href="#features" @click="mobileMenuOpen = false"
-                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-3 rounded-xl text-base font-medium">Features</a>
                 <a href="#products" @click="mobileMenuOpen = false"
-                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-2 rounded-md text-base font-medium">Products</a>
+                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-3 rounded-xl text-base font-medium">Products</a>
+                <a href="#gallery" @click="mobileMenuOpen = false"
+                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-3 rounded-xl text-base font-medium">Gallery</a>
+                <a href="#contact" @click="mobileMenuOpen = false"
+                    class="text-gray-300 hover:text-brand-green hover:bg-white/5 block px-3 py-3 rounded-xl text-base font-medium">Contact</a>
                 <a href="https://github.com/tooge-id" target="_blank"
-                    class="text-brand-green hover:bg-brand-green hover:text-black block px-3 py-2 rounded-md text-base font-bold mt-4">GitHub</a>
+                    class="text-brand-dark bg-brand-green hover:bg-brand-cyan block px-3 py-3 rounded-xl text-base font-bold mt-4">GitHub</a>
             </div>
         </div>
     </nav>
@@ -137,17 +153,24 @@
             <div
                 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-green/10 rounded-full blur-[100px]">
             </div>
+            <!-- Metric Grid Overlay -->
+            <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                                      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+                       background-size: 50px 50px;
+                       mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+                       -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);">
+            </div>
         </div>
 
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        <div class="relative z-10 text-center px-4 max-w-7xl mx-auto">
             <h1
                 class="gsap-hero-title font-heading text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white mb-6 leading-tight">
-                <span class="block">ORCHESTRATING</span>
+                <span class="block">BEYOND THE</span>
                 <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-cyan">GROWTH</span>
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-cyan">ORIGIN</span>
             </h1>
-            <p class="gsap-hero-subtitle text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 font-light">
-                The open-scalable IoT ecosystem bridging the gap between biological needs and digital precision.
+            <p class="gsap-hero-subtitle text-xl md:text-2xl text-gray-400 max-w-5xl mx-auto mb-10 font-light">
+                From complex organic beginnings to a plant-agnostic future.
             </p>
             <div class="gsap-hero-btn">
                 <a href="#vision"
@@ -163,6 +186,11 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path>
             </svg>
         </div>
+
+        <!-- Bottom Fade for Smooth Transition -->
+        <div
+            class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#050a06] to-transparent pointer-events-none z-0">
+        </div>
     </header>
 
     <!-- Vision Section -->
@@ -173,7 +201,7 @@
                     <span class="text-brand-green font-bold tracking-widest uppercase text-sm mb-4 block">The
                         Vision</span>
                     <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
-                        From <span class="text-brand-green">Tooge</span> to <br>Everything else.
+                        From <span class="text-brand-green">Element</span> to <br>Ecosystem.
                     </h2>
                     <p class="text-gray-400 text-lg leading-relaxed mb-6">
                         Designed as a precision system for complex organic growth, TOOGE has evolved into a fully
@@ -288,15 +316,451 @@
         </div>
     </section>
 
+    </section>
+
+    <!-- Flexibility Section -->
+    <section id="flexibility" class="py-16 md:py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Visual (Left on Desktop) -->
+                <div class="order-2 lg:order-1 relative gsap-fade-right">
+                    <div class="relative bg-brand-glass border border-brand-border p-6 rounded-2xl backdrop-blur-xl">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                    <i class="fa-solid fa-wifi text-brand-green"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold text-sm">Device: Node-01</div>
+                                    <div class="text-xs text-brand-green">Connected • 12ms</div>
+                                </div>
+                            </div>
+                            <div
+                                class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold border border-green-500/30">
+                                ACTIVE
+                            </div>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-black/40 p-3 rounded-xl border border-white/5">
+                                <div class="text-gray-400 text-xs mb-1">Moisture</div>
+                                <div class="text-white font-mono text-lg font-bold flex items-center gap-2">
+                                    65% <i class="fa-solid fa-droplet text-blue-400 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="bg-black/40 p-3 rounded-xl border border-white/5">
+                                <div class="text-gray-400 text-xs mb-1">Temp</div>
+                                <div class="text-white font-mono text-lg font-bold flex items-center gap-2">
+                                    26°C <i class="fa-solid fa-temperature-half text-orange-400 text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Schedule -->
+                        <div class="space-y-3 mb-6">
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Watering Schedule
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                                <span class="text-gray-300 text-sm font-mono">06:00 AM</span>
+                                <span
+                                    class="text-brand-green text-xs font-bold bg-brand-green/10 px-2 py-1 rounded">RUNNING</span>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                                <span class="text-gray-300 text-sm font-mono">18:00 PM</span>
+                                <span class="text-gray-500 text-xs font-bold">PENDING</span>
+                            </div>
+                        </div>
+
+                        <!-- Tracking -->
+                        <div class="bg-brand-cyan/10 rounded-xl p-4 border border-brand-cyan/20">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-brand-cyan font-bold text-sm"><i
+                                        class="fa-solid fa-clock-rotate-left mr-2"></i>Plant Age</span>
+                                <span class="text-white font-mono text-sm">12 Days</span>
+                            </div>
+                            <div class="w-full bg-black/50 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-brand-cyan h-full w-[30%]"></div>
+                            </div>
+                            <div class="text-right text-[10px] text-brand-cyan/80 mt-1">Stage: Vegetative</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text (Right on Desktop) -->
+                <div class="order-1 lg:order-2 gsap-fade-left">
+                    <span
+                        class="text-brand-cyan font-bold tracking-widest uppercase text-sm mb-4 block">Flexibility</span>
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+                        Total Control, <br>Zero Complexity.
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        Whether you're managing a single greenhouse or a distributed farm, TOOGE adapts to you.
+                        Set precision watering schedules, monitor micro-climates in real-time, and track your plant's
+                        lifecycle from seed to harvest.
+                    </p>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-green mt-1 mr-3"></i>
+                            <span>Customizable automation rules based on sensor data.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-green mt-1 mr-3"></i>
+                            <span>Historical data tracking for growth optimization.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-green mt-1 mr-3"></i>
+                            <span>Plant-specific profiles for tailored care.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-16 md:py-24 relative overflow-hidden bg-brand-dark/30">
+
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Text (Left on Desktop) -->
+                <div class="gsap-fade-right">
+                    <span class="text-brand-green font-bold tracking-widest uppercase text-sm mb-4 block">Comprehensive
+                        Control</span>
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+                        One Dashboard, <br>Complete Insight.
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        Stop juggling multiple tools. TOOGE unifies your entire operation into a single pane of glass.
+                        Identify trends, manage resources, and generate compliance reports instantly.
+                    </p>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chart-line text-brand-green  mt-1 mr-3"></i>
+                            <span>Real-time crop analytics & yield forecasting.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-file-pdf text-brand-green mt-1 mr-3"></i>
+                            <span>Automated PDF reporting for compliance & stakeholders.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-boxes-stacked text-brand-green mt-1 mr-3"></i>
+                            <span>Integrated inventory management for nutrients & resources.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Visual (Right on Desktop) -->
+                <div class="relative gsap-scale-up">
+                    <div class="relative bg-brand-glass border border-brand-border p-6 rounded-2xl backdrop-blur-xl">
+
+                        <!-- Chart Widget -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-white font-bold text-sm">Monthly Yield Estimate</h4>
+                                <span class="text-brand-green text-xs font-mono">+12.5%</span>
+                            </div>
+                            <div class="h-24 w-full flex items-end justify-between space-x-1">
+                                <div class="w-full bg-brand-green/10 rounded-t-sm h-[40%] text-center"></div>
+                                <div class="w-full bg-brand-green/10 rounded-t-sm h-[55%]"></div>
+                                <div class="w-full bg-brand-green/20 rounded-t-sm h-[45%]"></div>
+                                <div class="w-full bg-brand-green/30 rounded-t-sm h-[70%]"></div>
+                                <div class="w-full bg-brand-green/40 rounded-t-sm h-[60%]"></div>
+                                <div class="w-full bg-brand-green/60 rounded-t-sm h-[85%] relative overflow-hidden">
+                                    <div
+                                        class="absolute top-0 w-full h-full bg-gradient-to-t from-transparent to-brand-green/20 animate-pulse">
+                                    </div>
+                                </div>
+                                <div
+                                    class="w-full bg-brand-green dashed border-t border-brand-green/50 h-[95%] opacity-50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inventory & Reports Row -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Inventory Widget -->
+                            <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+                                <div class="text-gray-400 text-xs font-bold uppercase tracking-wider mb-3">Inventory
+                                    Alert</div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                                            <span class="text-xs text-gray-300">Nutrients A</span>
+                                        </div>
+                                        <span class="text-red-400 text-xs font-bold">120ml</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <span class="text-xs text-gray-300">Seed</span>
+                                        </div>
+                                        <span class="text-green-400 text-xs font-bold">1000g</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Report Widget -->
+                            <div
+                                class="bg-brand-cyan/10 p-4 rounded-xl border border-brand-cyan/20 flex flex-col justify-between">
+                                <div>
+                                    <i class="fa-solid fa-file-invoice text-brand-cyan text-xl mb-2"></i>
+                                    <div class="text-white text-sm font-bold leading-tight">Monthly Report Ready</div>
+                                </div>
+                                <button
+                                    class="mt-3 w-full py-1.5 text-xs font-bold text-black bg-brand-cyan rounded-lg hover:bg-white transition-colors">
+                                    Download PDF
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 md:py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 gsap-fade-up">
+                <span class="text-brand-green font-bold tracking-widest uppercase text-sm mb-2 block">The Suite</span>
+                <h2 class="font-heading text-4xl font-bold text-white">Product Ecosystem</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div
+                    class="group relative rounded-2xl overflow-hidden border border-brand-border bg-brand-glass hover:border-brand-green/50 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-48 bg-brand-darker relative overflow-hidden flex items-center justify-center">
+                        <div
+                            class="absolute inset-0 bg-brand-green/5 group-hover:bg-brand-green/10 transition-colors duration-500">
+                        </div>
+                        <i
+                            class="fa-solid fa-microchip text-6xl text-brand-green/80 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="font-heading text-2xl font-bold text-white mb-3">Tooge OS</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">The lightweight, real-time operating
+                            system designed specifically for precision agriculture nodes.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-brand-green font-bold text-sm hover:text-white transition-colors mt-auto">
+                            Learn more <i
+                                class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div
+                    class="group relative rounded-2xl overflow-hidden border border-brand-border bg-brand-glass hover:border-brand-cyan/50 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-48 bg-brand-darker relative overflow-hidden flex items-center justify-center">
+                        <div
+                            class="absolute inset-0 bg-brand-cyan/5 group-hover:bg-brand-cyan/10 transition-colors duration-500">
+                        </div>
+                        <i
+                            class="fa-solid fa-server text-6xl text-brand-cyan/80 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="font-heading text-2xl font-bold text-white mb-3">Hardware Nodes</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Modular ESP32-based controller units with
+                            plug-and-play sensor capability and mesh networking.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-brand-cyan font-bold text-sm hover:text-white transition-colors mt-auto">
+                            Specs <i
+                                class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div
+                    class="group relative rounded-2xl overflow-hidden border border-brand-border bg-brand-glass hover:border-brand-green/50 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-48 bg-brand-darker relative overflow-hidden flex items-center justify-center">
+                        <div
+                            class="absolute inset-0 bg-brand-green/5 group-hover:bg-brand-green/10 transition-colors duration-500">
+                        </div>
+                        <i
+                            class="fa-solid fa-cloud text-6xl text-brand-green/80 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="font-heading text-2xl font-bold text-white mb-3">Tooge Cloud</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Centralized dashboard for fleet
+                            management, data analytics, and over-the-air updates.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-brand-green font-bold text-sm hover:text-white transition-colors mt-auto">
+                            View Platform <i
+                                class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 md:py-24 bg-brand-dark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-cyan font-bold tracking-widest uppercase text-sm mb-2 block">Gallery</span>
+                <h2 class="font-heading text-4xl font-bold text-white">Deployed Ecosystems</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px]">
+                <!-- Item 1: Large (2x2) -->
+                <div
+                    class="col-span-2 row-span-2 relative group rounded-2xl overflow-hidden bg-brand-darker border border-brand-border">
+                    <div class="absolute inset-0 flex items-center justify-center bg-brand-green/5">
+                        <i
+                            class="fa-solid fa-plant-wilt text-6xl text-brand-green/20 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <span class="text-brand-green text-xs font-bold uppercase mb-1 block">Project</span>
+                        <h3 class="text-white font-heading text-2xl font-bold">Smart Greenhouse</h3>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative group rounded-2xl overflow-hidden bg-brand-darker border border-brand-border">
+                    <div class="absolute inset-0 flex items-center justify-center bg-brand-cyan/5">
+                        <i
+                            class="fa-solid fa-server text-4xl text-brand-cyan/20 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <span class="text-brand-cyan text-xs font-bold uppercase mb-1 block">Hardware</span>
+                        <h3 class="text-white font-heading text-lg font-bold">Node V2.0</h3>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative group rounded-2xl overflow-hidden bg-brand-darker border border-brand-border">
+                    <div class="absolute inset-0 flex items-center justify-center bg-brand-green/5">
+                        <i
+                            class="fa-solid fa-chart-pie text-4xl text-brand-green/20 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <span class="text-brand-green text-xs font-bold uppercase mb-1 block">Analytics</span>
+                        <h3 class="text-white font-heading text-lg font-bold">Mobile App</h3>
+                    </div>
+                </div>
+
+                <!-- Item 4: Wide (2x1) -->
+                <div
+                    class="col-span-2 relative group rounded-2xl overflow-hidden bg-brand-darker border border-brand-border">
+                    <div class="absolute inset-0 flex items-center justify-center bg-purple-500/5">
+                        <i
+                            class="fa-solid fa-solar-panel text-5xl text-purple-500/20 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <span class="text-purple-400 text-xs font-bold uppercase mb-1 block">Energy</span>
+                        <h3 class="text-white font-heading text-xl font-bold">Solar Integration</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Info -->
+                <div>
+                    <span class="text-brand-green font-bold tracking-widest uppercase text-sm mb-4 block">Get in
+                        Touch</span>
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+                        Ready to <br>Orchestrate?
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Whether you are a hobbyist or large-scale farmer, we'd love to hear how Tooge can help you grow.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-brand-glass border border-brand-border flex items-center justify-center text-brand-green">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500 font-bold uppercase">Email</div>
+                                <a href="mailto:hello@tooge.id"
+                                    class="text-white text-lg hover:text-brand-green transition-colors">hello@tooge.id</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-brand-glass border border-brand-border flex items-center justify-center text-brand-cyan">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500 font-bold uppercase">Location</div>
+                                <span class="text-white text-lg">Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-brand-glass border border-brand-border p-8 rounded-3xl backdrop-blur-xl">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-400 mb-2">Name</label>
+                                <input type="text"
+                                    class="w-full bg-black/40 border border-brand-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all"
+                                    placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-400 mb-2">Email</label>
+                                <input type="email"
+                                    class="w-full bg-black/40 border border-brand-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all"
+                                    placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-400 mb-2">Message</label>
+                            <textarea rows="4"
+                                class="w-full bg-black/40 border border-brand-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all"
+                                placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="button"
+                            class="w-full bg-brand-green hover:bg-brand-cyan text-brand-darker font-bold py-4 rounded-xl transition-colors duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="py-12 border-t border-brand-border bg-black">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h3 class="font-heading text-2xl font-bold text-white mb-2">TOOGE</h3>
-            <p class="text-gray-500 mb-6">&copy; 2026 Tooge Organization. Open Source.</p>
-            <div class="flex justify-center space-x-6">
-                <a href="https://github.com/tooge-id"
-                    class="text-gray-400 hover:text-brand-green transition-colors">GitHub</a>
-            </div>
+            <p class="text-gray-500 mb-6">&copy; 2026 Tooge All rights reserved.</p>
         </div>
     </footer>
 

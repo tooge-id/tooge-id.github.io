@@ -42,6 +42,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- Scroll Spy (Active Nav) ---
+    const sections = document.querySelectorAll('section[id], header[id]');
+    // Only select internal navigation links to avoid affecting buttons like GitHub
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+
+                // 1. Reset ALL internal nav links to default state
+                navLinks.forEach(link => {
+                    link.classList.remove('text-brand-green');
+                    link.classList.add('text-gray-300');
+                });
+
+                // 2. Highlight ALL links causing to this section (Desktop + Mobile)
+                const activeLinks = document.querySelectorAll(`nav a[href="#${id}"]`);
+                activeLinks.forEach(activeLink => {
+                    activeLink.classList.remove('text-gray-300');
+                    activeLink.classList.add('text-brand-green');
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
     // --- Hero Animations ---
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
@@ -91,30 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         duration: 1,
         ease: 'power3.out'
-    });
-
-    // Feature Cards Stagger (Refined)
-    // Use .batch to trigger them as a group when the container enters, or as they appear
-    ScrollTrigger.batch('.feature-card', {
-        start: 'top 85%',
-        onEnter: batch => gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            autoAlpha: 1,
-            stagger: 0.15,
-            overwrite: true,
-            duration: 0.8,
-            ease: 'power3.out'
-        }),
-        onLeave: batch => gsap.set(batch, { opacity: 0, y: 50 }),
-        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15, overwrite: true, duration: 0.8, ease: 'power3.out' }),
-        onLeaveBack: batch => gsap.set(batch, { opacity: 0, y: 50 })
-    });
-
-    // Determine initial state for features
-    gsap.set('.feature-card', {
-        y: 50,
-        opacity: 0
     });
 
     // --- Product Cards Animation ---
